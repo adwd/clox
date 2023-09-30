@@ -1,19 +1,23 @@
 CC = gcc
-CFLAGS = -Wall -Werror -g
+CFLAGS = -Wall -g
+#CFLAGS = -Wall -Werror -g
+TARGET = clox
 
-SRCS = main.c chunk.c memory.c debug.c value.c vm.c
+SRCS = $(wildcard *.c)
 OBJS = $(SRCS:.c=.o)
 
-all: clox
+.PHONY: all clean run
 
-clox: $(OBJS)
+all: $(TARGET)
+
+$(TARGET): $(OBJS)
 	$(CC) $(CFLAGS) -o $@ $^
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c -o $@ $<
 
-run: clox
-	./clox
+run: $(TARGET)
+	./$(TARGET)
 
 clean:
-	rm -f clox $(OBJS)
+	rm -f $(TARGET) $(OBJS)
