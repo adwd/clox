@@ -13,6 +13,7 @@ void* reallocate(void* pointer, size_t oldSize, size_t newSize) {
     if (result == NULL) exit(1);
     return result;
 }
+
 static void freeObject(Obj* object) {
     switch (object->type) {
         case OBJ_STRING: {
